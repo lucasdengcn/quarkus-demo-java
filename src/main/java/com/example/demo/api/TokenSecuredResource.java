@@ -1,6 +1,7 @@
 package com.example.demo.api;
 
 import com.example.demo.annotation.APICommonResponse;
+import com.example.demo.annotation.APIJwtScheme;
 import jakarta.annotation.security.PermitAll;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
@@ -10,6 +11,9 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.SecurityContext;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.microprofile.jwt.JsonWebToken;
+import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeIn;
+import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
+import org.eclipse.microprofile.openapi.annotations.security.SecurityScheme;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import java.util.HashMap;
@@ -40,6 +44,7 @@ public class TokenSecuredResource {
     @GET
     @Path("/v1/roles-allowed")
     @RolesAllowed({"User", "Admin"})
+    @APIJwtScheme
     public Map<String, Object> rolesAllowed(){
         log.info("jwt is {}", jwt);
         Map<String, Object> map = getResponseMap(ctx);
