@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'io.quarkus'
     id "io.freefair.lombok" version "8.10.2"
+    id 'org.jetbrains.kotlin.jvm'
 }
 
 repositories {
@@ -36,14 +37,13 @@ dependencies {
     testImplementation 'io.quarkus:quarkus-junit5'
     testImplementation 'io.rest-assured:rest-assured'
     testAnnotationProcessor 'org.mapstruct:mapstruct-processor:1.6.2'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 }
 
 group 'com.example.demo'
 version '1.0.0-SNAPSHOT'
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
 }
 
 test {
@@ -56,4 +56,7 @@ compileJava {
 
 compileTestJava {
     options.encoding = 'UTF-8'
+}
+kotlin {
+    jvmToolchain(21)
 }

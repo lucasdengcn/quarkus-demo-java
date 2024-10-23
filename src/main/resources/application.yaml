@@ -31,8 +31,38 @@ quarkus:
       generation: none
     flush:
       mode: auto
-
   # REST Client configuration property
   rest-client:
     org.acme.rest.client.ExtensionsService:
       url: https://stage.code.quarkus.io/api
+
+# kafka
+kafka:
+  bootstrap:
+    servers: localhost:39192
+# messaging
+mp:
+  messaging:
+    connector:
+      smallrye-kafka:
+        client-id-prefix: orders
+        group:
+          id: orders
+        enable:
+          auto:
+            commit: true
+        auto:
+          offset:
+            reset: latest
+    incoming:
+      ordersIn:
+        connector: smallrye-kafka
+        topic: order_create
+        value:
+          deserializer: com.example.demo.messaging.serde.OrderMessageDeserializer
+    outgoing:
+      ordersOut:
+        connector: smallrye-kafka
+        topic: order_create
+        value:
+          serializer: io.quarkus.kafka.client.serialization.ObjectMapperSerializer

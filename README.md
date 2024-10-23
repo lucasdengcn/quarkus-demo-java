@@ -101,5 +101,14 @@ RFC7807 Problem schema
 https://quarkus.io/guides/messaging
 https://quarkus.io/guides/kafka-getting-started
 https://quarkus.io/guides/kafka
+https://quarkus.io/guides/kafka#incoming-channel-configuration-polling-from-kafka
+
+
+### OTEL
+
+https://quarkus.io/guides/opentelemetry
+https://quarkus.io/guides/telemetry-micrometer
+
+
 
 

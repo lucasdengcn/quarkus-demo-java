@@ -3,6 +3,7 @@ package com.example.demo.service;
 import com.example.demo.entity.OrderEntity;
 import com.example.demo.exception.supplier.EntityNotFoundExceptionSupplier;
 import com.example.demo.mapper.OrderMapper;
+import com.example.demo.messaging.producer.OrderMessageProducer;
 import com.example.demo.model.Order;
 import com.example.demo.model.OrderInput;
 import com.example.demo.model.common.PageableOutput;
@@ -29,6 +30,10 @@ public class OrderService {
 
     @Inject
     private OrderMapper orderMapper;
+
+    @Inject
+    private OrderMessageProducer orderMessageProducer;
+
 
     public List<Order> findAllOrders(){
         PanacheQuery<OrderEntity> panacheQuery = orderRepository.findAll();
@@ -59,7 +64,11 @@ public class OrderService {
         orderEntity.setEndTime(LocalTime.now());
         orderRepository.persist(orderEntity);
         log.info("saved entity. {}", orderEntity);
-        return orderMapper.toModel(orderEntity);
+        Order model = orderMapper.toModel(orderEntity);
+        //
+        orderMessageProducer.sendCreated(model);
+        //
+        return model;
     }
 
     @Transactional
