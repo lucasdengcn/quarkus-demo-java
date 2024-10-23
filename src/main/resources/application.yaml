@@ -8,7 +8,10 @@ quarkus:
 #    title: Quarkus Demo
   # logging
   log:
-    level: DEBUG
+    level: INFO
+    category:
+      org.hibernate:
+        level: DEBUG
   # datasource
   datasource:
     devservices:
@@ -28,6 +31,8 @@ quarkus:
       enabled: true
     database:
       generation: none
+    flush:
+      mode: auto
 
   # REST Client configuration property
   rest-client:

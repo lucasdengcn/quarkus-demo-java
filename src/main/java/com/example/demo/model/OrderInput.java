@@ -9,23 +9,23 @@ import org.hibernate.validator.constraints.Range;
 
 @Data
 @Builder
-@Schema
+@Schema(description = "Create Order JSON input")
 public class OrderInput {
 
-    @SchemaProperty(name = "customerId", description = "customer's id", example = "123")
+    @Schema(name = "customerId", description = "customer's id", example = "123")
     @NotNull(message = "customer's id should not be NULL")
     private Integer customerId;
 
-    @SchemaProperty(name = "productId", description = "product's id", example = "123")
+    @Schema(name = "productId", description = "product's id", example = "123")
     @NotNull(message = "product's id should not be NULL")
     private Integer productId;
 
-    @SchemaProperty(name = "productCount", description = "the number of product purchased", example = "10")
+    @Schema(name = "productCount", description = "the number of product purchased", example = "10")
     @NotNull(message = "productCount should not be NULL")
     @Range(min = 1, max = 10)
     private Integer productCount;
 
-    @SchemaProperty(name = "price", description = "product's price", example = "50")
+    @Schema(name = "price", description = "product's price", example = "50")
     @NotNull(message = "price should not be NULL")
     @Range(min = 0, max = 100)
     private Integer price;

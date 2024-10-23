@@ -85,6 +85,13 @@ https://quarkus.io/guides/logging
 
 https://quarkus.io/guides/openapi-swaggerui
 
+### Transaction
+
+https://quarkus.io/guides/hibernate-orm-panache#transactions
+
+### Error Response
+
+https://github.com/quarkiverse/quarkus-resteasy-problem
 
 
 
