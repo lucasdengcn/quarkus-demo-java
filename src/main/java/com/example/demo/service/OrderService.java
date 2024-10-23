@@ -8,6 +8,9 @@ import com.example.demo.model.Order;
 import com.example.demo.model.OrderInput;
 import com.example.demo.model.common.PageableOutput;
 import com.example.demo.repository.OrderRepository;
+import io.quarkus.cache.CacheInvalidate;
+import io.quarkus.cache.CacheKey;
+import io.quarkus.cache.CacheResult;
 import io.quarkus.hibernate.orm.panache.PanacheQuery;
 import io.quarkus.panache.common.Page;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -24,6 +27,8 @@ import java.util.List;
 @Slf4j
 @ApplicationScoped
 public class OrderService {
+
+    public static final String ORDERS_CACHE = "orders-cache";
 
     @Inject
     private OrderRepository orderRepository;
@@ -51,7 +56,8 @@ public class OrderService {
         return new PageableOutput<Order>(panacheQuery, models, size, index);
     }
 
-    public Order findOrderById(Integer id){
+    @CacheResult(cacheName = ORDERS_CACHE)
+    public Order findOrderById(@CacheKey Integer id){
         OrderEntity orderEntity = orderRepository.findByIdOptional(id)
                 .orElseThrow(new EntityNotFoundExceptionSupplier<>(OrderEntity.class, id));
         return orderMapper.toModel(orderEntity);
@@ -72,20 +78,22 @@ public class OrderService {
     }
 
     @Transactional
-    public void deleteOrder(Integer id) throws EntityNotFoundException {
+    @CacheInvalidate(cacheName = ORDERS_CACHE)
+    public void deleteOrder(@CacheKey Integer id) throws EntityNotFoundException {
         OrderEntity orderEntity = orderRepository.findByIdOptional(id)
                 .orElseThrow(new EntityNotFoundExceptionSupplier<>(OrderEntity.class, id));
         orderRepository.delete(orderEntity);
     }
 
     @Transactional
-    public Order updateOrder(Integer id, OrderInput orderInput){
+    @CacheInvalidate(cacheName = ORDERS_CACHE)
+    public Order updateOrder(@CacheKey Integer id, OrderInput orderInput){
         OrderEntity orderEntity = orderRepository.findByIdOptional(id)
                 .orElseThrow(new EntityNotFoundExceptionSupplier<>(OrderEntity.class, id));
         OrderEntity entity = orderMapper.toEntity(orderInput);
         entity.setId(id);
         orderRepository.persist(entity);
-        return orderMapper.toModel(entity);
+        return orderMapper.toModel(orderEntity);
     }
 
 }

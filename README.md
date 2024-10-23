@@ -109,6 +109,11 @@ https://quarkus.io/guides/kafka#incoming-channel-configuration-polling-from-kafk
 https://quarkus.io/guides/opentelemetry
 https://quarkus.io/guides/telemetry-micrometer
 
+### Cache
+
+https://quarkus.io/guides/cache-redis-reference
+https://quarkus.io/guides/cache
+https://quarkus.io/guides/redis-reference
 
 
 

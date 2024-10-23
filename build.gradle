@@ -18,6 +18,11 @@ dependencies {
     implementation 'io.quarkus:quarkus-rest'
     implementation 'io.quarkus:quarkus-rest-jackson'
     implementation 'io.quarkus:quarkus-arc'
+    // cache
+    implementation 'io.quarkus:quarkus-cache'
+    implementation 'io.quarkus:quarkus-redis-cache'
+    implementation 'io.quarkus:quarkus-redis-client'
+    // implementation 'org.redisson:redisson-quarkus-30-cache:3.33.0'
     // messaging
     implementation 'io.quarkus:quarkus-messaging-kafka'
     implementation 'io.quarkus:quarkus-kafka-client'

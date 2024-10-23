@@ -31,6 +31,18 @@ quarkus:
       generation: none
     flush:
       mode: auto
+  # redis
+  redis:
+    hosts: redis://localhost:6379/0
+    timeout: 5s
+  # cache
+  cache:
+    type: redis
+    redis:
+      expire-after-write: 300s
+      orders-cache:
+        prefix: orders
+        value-type: com.example.demo.model.Order
   # REST Client configuration property
   rest-client:
     org.acme.rest.client.ExtensionsService:
