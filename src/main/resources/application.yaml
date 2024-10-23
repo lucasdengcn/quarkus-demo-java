@@ -1,6 +1,9 @@
 quarkus:
   devservices:
     enabled: false
+  native:
+    resources:
+      includes: publicKey.pem
   # OAS
   swagger-ui:
     always-include: true
@@ -8,6 +11,8 @@ quarkus:
   log:
     level: INFO
     category:
+      io.quarkus.vertx.http.access:
+        level: DEBUG
       org.hibernate:
         level: DEBUG
   # datasource
@@ -61,6 +66,14 @@ kafka:
     servers: localhost:39192
 # messaging
 mp:
+  jwt:
+    verify:
+      publickey:
+        location: publicKey.pem
+        algorithm: RS256
+      issuer: https://example.com/issuer
+      audiences: demo-app
+      age: 600
   messaging:
     connector:
       smallrye-kafka:

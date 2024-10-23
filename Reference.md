@@ -65,4 +65,8 @@ https://quarkus.io/guides/security-authentication-mechanisms#mutual-tls
 
 https://quarkus.io/guides/security-jwt
 
+### Testing
+
+https://www.baeldung.com/rest-assured-header-cookie-parameter
+
 

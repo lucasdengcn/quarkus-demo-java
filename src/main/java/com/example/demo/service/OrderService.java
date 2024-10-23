@@ -18,6 +18,8 @@ import jakarta.inject.Inject;
 
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
+import jakarta.ws.rs.core.Context;
+import jakarta.ws.rs.core.SecurityContext;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDate;
@@ -39,6 +41,8 @@ public class OrderService {
     @Inject
     private OrderMessageProducer orderMessageProducer;
 
+    @Context
+    private SecurityContext ctx;
 
     public List<Order> findAllOrders(){
         PanacheQuery<OrderEntity> panacheQuery = orderRepository.findAll();
