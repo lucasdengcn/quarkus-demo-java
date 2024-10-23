@@ -4,8 +4,6 @@ quarkus:
   # OAS
   swagger-ui:
     always-include: true
-#    path: /swagger-ui/index.html
-#    title: Quarkus Demo
   # logging
   log:
     level: INFO
@@ -21,7 +19,7 @@ quarkus:
       url: jdbc:postgresql://localhost:15432/postgres?currentSchema=demo-service&autoReconnect=true&serverTimezone=UTC&characterEncoding=utf-8&allowMultiQueries=true&stringtype=unspecified
     username: postgres
     password: pgdev01
-
+  # orm
   hibernate-orm:
     statistics: true
     physical-naming-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy

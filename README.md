@@ -66,12 +66,15 @@ Easily start your REST Web Services
 
 [Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)
 
+## Practices 
+
 ### ORM
 
 https://quarkus.io/guides/hibernate-orm
 https://quarkus.io/guides/hibernate-orm#hibernate-configuration-properties
 https://quarkus.io/guides/datasource
 https://quarkus.io/guides/hibernate-orm-panache
+https://docs.jboss.org/hibernate/orm/7.0/userguide/html_single/Hibernate_User_Guide.html#PhysicalNamingStrategy
 
 ### Yaml
 
@@ -89,9 +92,14 @@ https://quarkus.io/guides/openapi-swaggerui
 
 https://quarkus.io/guides/hibernate-orm-panache#transactions
 
-### Error Response
+### Common Error Response
 
-https://github.com/quarkiverse/quarkus-resteasy-problem
+RFC7807 Problem schema
 
+### Messaging
+
+https://quarkus.io/guides/messaging
+https://quarkus.io/guides/kafka-getting-started
+https://quarkus.io/guides/kafka
 
 
