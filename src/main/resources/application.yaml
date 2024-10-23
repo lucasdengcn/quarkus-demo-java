@@ -1,0 +1,35 @@
+quarkus:
+  devservices:
+    enabled: false
+  # OAS
+  swagger-ui:
+    always-include: true
+#    path: /swagger-ui/index.html
+#    title: Quarkus Demo
+  # logging
+  log:
+    level: DEBUG
+  # datasource
+  datasource:
+    devservices:
+      enabled: false
+    db-kind: postgresql
+    jdbc:
+      url: jdbc:postgresql://localhost:15432/postgres?currentSchema=demo-service&autoReconnect=true&serverTimezone=UTC&characterEncoding=utf-8&allowMultiQueries=true&stringtype=unspecified
+    username: postgres
+    password: pgdev01
+
+  hibernate-orm:
+    statistics: true
+    physical-naming-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
+    metrics:
+      enabled: true
+    validation:
+      enabled: true
+    database:
+      generation: none
+
+  # REST Client configuration property
+  rest-client:
+    org.acme.rest.client.ExtensionsService:
+      url: https://stage.code.quarkus.io/api
