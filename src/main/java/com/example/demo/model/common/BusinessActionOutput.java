@@ -7,7 +7,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 @Schema
 @Data
 @Builder
-public class DangerOpOutput {
+public class BusinessActionOutput {
 
     @Schema(description = "operation status", example = "true")
     private boolean success = true;

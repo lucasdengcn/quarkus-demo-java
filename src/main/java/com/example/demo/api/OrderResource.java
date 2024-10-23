@@ -3,11 +3,11 @@ package com.example.demo.api;
 import com.example.demo.annotation.APICommonResponse;
 import com.example.demo.annotation.ResponseWithOrder;
 import com.example.demo.annotation.ResponseWithOrderCreated;
-import com.example.demo.annotation.ResponseOnDangerOp;
+import com.example.demo.annotation.ResponseOnBusinessAction;
 import com.example.demo.model.Order;
 import com.example.demo.model.OrderInput;
 import com.example.demo.model.common.PageableOutput;
-import com.example.demo.model.common.DangerOpOutput;
+import com.example.demo.model.common.BusinessActionOutput;
 import com.example.demo.service.OrderService;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityNotFoundException;
@@ -67,10 +67,10 @@ public class OrderResource {
     @DELETE
     @Path("/v1/{id}")
     @Operation(description = "Delete a order via id")
-    @ResponseOnDangerOp
-    public DangerOpOutput deleteOrder(@PathParam("id") Integer id) throws EntityNotFoundException {
+    @ResponseOnBusinessAction
+    public BusinessActionOutput deleteOrder(@PathParam("id") Integer id) throws EntityNotFoundException {
         orderService.deleteOrder(id);
-        return DangerOpOutput.builder().success(true).build();
+        return BusinessActionOutput.builder().success(true).build();
     }
 
     @POST
