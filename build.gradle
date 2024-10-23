@@ -18,6 +18,7 @@ dependencies {
     implementation 'io.quarkus:quarkus-rest'
     implementation 'io.quarkus:quarkus-rest-jackson'
     implementation 'io.quarkus:quarkus-arc'
+    implementation 'io.quarkus:quarkus-rest-client-jackson'
     // cache
     implementation 'io.quarkus:quarkus-cache'
     implementation 'io.quarkus:quarkus-redis-cache'
@@ -40,6 +41,7 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     //
     testImplementation 'io.quarkus:quarkus-junit5'
+    testImplementation 'io.quarkus:quarkus-junit5-mockito'
     testImplementation 'io.rest-assured:rest-assured'
     testAnnotationProcessor 'org.mapstruct:mapstruct-processor:1.6.2'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"

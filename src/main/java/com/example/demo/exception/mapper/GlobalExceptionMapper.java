@@ -1,6 +1,7 @@
 package com.example.demo.exception.mapper;
 
 import com.example.demo.exception.HttpProblem;
+import com.example.demo.exception.RemoteAPICallException;
 import jakarta.annotation.Priority;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.ws.rs.Priorities;
@@ -18,8 +19,17 @@ public class GlobalExceptionMapper extends ExceptionMapperBase<Exception> {
         log.error("Problem:", exception);
         if (exception instanceof EntityNotFoundException) {
             return buildNotFoundProblem(exception);
+        } else if (exception instanceof RemoteAPICallException) {
+            return buildRemoteAPICallProblem((RemoteAPICallException)exception);
         }
         return buildDefaultProblem(exception);
+    }
+
+    private static HttpProblem.Builder buildRemoteAPICallProblem(RemoteAPICallException exception) {
+        return HttpProblem.builder()
+                .withStatus(exception.getStatusCode())
+                .withTitle("Remote API Error")
+                .withDetail(exception.getMessage());
     }
 
     private static HttpProblem.Builder buildNotFoundProblem(Exception exception) {

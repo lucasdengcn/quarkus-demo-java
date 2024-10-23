@@ -43,10 +43,17 @@ quarkus:
       orders-cache:
         prefix: orders
         value-type: com.example.demo.model.Order
-  # REST Client configuration property
+      posts-cache:
+        prefix: posts
+        value-type: com.example.demo.integration.model.FakePost
+  # REST Client
   rest-client:
-    org.acme.rest.client.ExtensionsService:
-      url: https://stage.code.quarkus.io/api
+    logging:
+      scope: request-response
+      body-limit: 50
+    fake-post-client:
+      url: https://jsonplaceholder.typicode.com
+      scope: jakarta.inject.Singleton
 
 # kafka
 kafka:

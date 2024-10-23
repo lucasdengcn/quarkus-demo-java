@@ -38,6 +38,12 @@ public class PageableOutput<T> {
     @Schema(description = "would the list reach to the head.")
     private boolean hasPreviousPage;
 
+    public PageableOutput(List<T> items, int pageSize, int pageIndex) {
+        this.items = items;
+        this.pageSize = pageSize;
+        this.pageIndex = pageIndex;
+    }
+
     public PageableOutput(PanacheQuery<?> panacheQuery, List<T> items, int pageSize, int pageIndex) {
         this.items = items;
         this.pageSize = pageSize;
