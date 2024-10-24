@@ -62,6 +62,8 @@ quarkus:
 
 # kafka
 kafka:
+  group:
+    id: demoService-orders
   bootstrap:
     servers: localhost:39192
 # messaging
@@ -78,23 +80,28 @@ mp:
     connector:
       smallrye-kafka:
         client-id-prefix: orders
-        group:
-          id: orders
-        enable:
-          auto:
-            commit: true
-        auto:
-          offset:
-            reset: latest
+        # producer
+        retries: 3
+        acks: 1
+        max-inflight-messages: 10
+        # consumer
+        enable.auto.commit: false
+        auto.offset.reset: latest
+        retry-max-wait: 10
+        #failure-strategy: dead-letter-queue
+        max.poll.records: 1000
+        isolation.level: read_committed
     incoming:
       ordersIn:
         connector: smallrye-kafka
-        topic: order_create
+        topic: demoService-orders
+        #dead-letter-queue:
+        #  topic: demoService-orders-dlq
         value:
           deserializer: com.example.demo.messaging.serde.OrderMessageDeserializer
     outgoing:
       ordersOut:
         connector: smallrye-kafka
-        topic: order_create
+        transactional.id: demoService-orders-${quarkus:uuid}
         value:
           serializer: io.quarkus.kafka.client.serialization.ObjectMapperSerializer

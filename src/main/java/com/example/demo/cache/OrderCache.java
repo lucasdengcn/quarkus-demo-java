@@ -5,9 +5,9 @@ import io.quarkus.cache.Cache;
 import io.quarkus.cache.CacheName;
 import io.quarkus.redis.datasource.RedisDataSource;
 import io.quarkus.redis.datasource.value.ValueCommands;
+import io.smallrye.common.constraint.NotNull;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import org.jetbrains.annotations.NotNull;
 
 @ApplicationScoped
 public class OrderCache {

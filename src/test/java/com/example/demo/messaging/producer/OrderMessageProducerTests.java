@@ -8,17 +8,21 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@Disabled
 @QuarkusTest
 class OrderMessageProducerTests {
 
     @Inject
     OrderMessageProducer orderMessageProducer;
 
-    @Disabled
     @Test
-    void send_order() {
+    void send_order_created() {
         orderMessageProducer.sendCreated(Order.builder().id(1).build());
     }
 
+    @Test
+    void send_order_updated() {
+        orderMessageProducer.sendUpdated(Order.builder().id(1).build());
+    }
 
 }
