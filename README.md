@@ -35,6 +35,11 @@ You can run your application in dev mode that enables live coding using:
 
 > **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at <http://localhost:8080/q/dev/>.
 
+## Timing
+
+2024-10-24 18:26:21,742 INFO  [io.quarkus] (main) demo-app 1.0.0-SNAPSHOT native (powered by Quarkus 3.15.1) started in __0.392s__. Listening on: http://0.0.0.0:8080. Management interface listening on http://0.0.0.0:9000.
+
+
 ## Packaging and running the application
 
 The application can be packaged using:
@@ -106,5 +111,4 @@ http://localhost:8080/q/health-ui/
 ### Open API
 
 http://localhost:9000/q/swagger-ui/
-
 
