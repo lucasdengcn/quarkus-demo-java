@@ -96,19 +96,24 @@ Easily start your REST Web Services
 ### Management interface
 
 http://0.0.0.0:9000/q/metrics
+
 http://0.0.0.0:9000/q/metrics/prometheus
+
 http://0.0.0.0:9000/q/metrics/json
 
 ### Health check
 
 http://0.0.0.0:9000/q/health/live - The application is up and running.
+
 http://0.0.0.0:9000/q/health/ready - The application is ready to serve requests.
+
 http://0.0.0.0:9000/q/health/started - The application is started.
+
 http://0.0.0.0:9000/q/health - Accumulating all health check procedures in the application.
 
 http://localhost:8080/q/health-ui/
 
 ### Open API
 
-http://localhost:9000/q/swagger-ui/
+http://localhost:8080/q/swagger-ui/
 
