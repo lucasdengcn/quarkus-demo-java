@@ -48,6 +48,8 @@ dependencies {
     implementation 'io.quarkus:quarkus-smallrye-health'
     // for debugging
     implementation 'io.opentelemetry:opentelemetry-exporter-logging'
+    // scheduler
+    implementation 'io.quarkus:quarkus-scheduler'
     //
     compileOnly 'org.projectlombok:lombok'
     //

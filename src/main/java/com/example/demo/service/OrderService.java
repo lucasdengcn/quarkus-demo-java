@@ -21,6 +21,7 @@ import jakarta.transaction.Transactional;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.SecurityContext;
 import lombok.extern.slf4j.Slf4j;
+import org.eclipse.microprofile.context.ManagedExecutor;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -43,6 +44,9 @@ public class OrderService {
 
     @Context
     private SecurityContext ctx;
+
+    @Inject
+    private ManagedExecutor managedExecutor;
 
     public List<Order> findAllOrders(){
         PanacheQuery<OrderEntity> panacheQuery = orderRepository.findAll();

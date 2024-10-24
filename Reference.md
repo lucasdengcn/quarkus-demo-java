@@ -65,14 +65,46 @@ https://quarkus.io/guides/redis-reference#use-the-vert-x-redis-client
 
 ### Security
 
+https://quarkus.io/guides/security-overview
+
 https://quarkus.io/guides/security-authentication-mechanisms
 
 https://quarkus.io/guides/security-authentication-mechanisms#mutual-tls
 
 https://quarkus.io/guides/security-jwt
 
+
+
 ### Testing
 
 https://www.baeldung.com/rest-assured-header-cookie-parameter
+
+### Events and Async
+
+https://quarkus.io/guides/reactive-event-bus
+
+### Scheduler
+
+https://quarkus.io/guides/scheduler
+https://quarkus.io/guides/quartz
+
+### Long Running Task
+
+https://quarkus.io/blog/using-lra/
+
+ManagedExecutor managedExecutor;
+
+
+### Context
+
+https://quarkus.io/guides/context-propagation
+
+### Reactive
+
+https://quarkus.io/guides/quarkus-reactive-architecture#unification-of-imperative-and-reactive
+
+https://smallrye.io/smallrye-mutiny/latest/
+
+
 
 
