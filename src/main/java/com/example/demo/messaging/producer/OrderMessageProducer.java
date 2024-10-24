@@ -6,6 +6,7 @@ import io.smallrye.reactive.messaging.MutinyEmitter;
 import io.smallrye.reactive.messaging.OutgoingMessageMetadata;
 import io.smallrye.reactive.messaging.kafka.api.OutgoingKafkaRecordMetadata;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.microprofile.reactive.messaging.*;
 
@@ -20,6 +21,8 @@ import java.util.function.Supplier;
 @Slf4j
 public class OrderMessageProducer {
 
+    public static final String TOPIC_DEMO_SERVICE_ORDERS = "demoService-orders";
+
     @Channel("ordersOut")
     Emitter<OrderMessage> emitter;
 
@@ -27,12 +30,13 @@ public class OrderMessageProducer {
      *
      * @param order
      */
+    @Transactional
     public void sendCreated(Order order){
         log.info("sendCreated message: {}", order);
         OrderMessage orderMessage = OrderMessage.builder().action("CREATED").order(order).build();
         //
         OutgoingKafkaRecordMetadata<String> metadata = OutgoingKafkaRecordMetadata.<String>builder()
-                .withTopic("order_create")
+                .withTopic(TOPIC_DEMO_SERVICE_ORDERS)
                 .withKey("orders:" + order.getId())
                 .build();
         //
@@ -65,7 +69,7 @@ public class OrderMessageProducer {
         OrderMessage orderMessage = OrderMessage.builder().action("UPDATED").order(order).build();
         //
         OutgoingKafkaRecordMetadata<String> metadata = OutgoingKafkaRecordMetadata.<String>builder()
-                .withTopic("demoService-orders")
+                .withTopic(TOPIC_DEMO_SERVICE_ORDERS)
                 .withKey("orders:" + order.getId())
                 .build();
         //

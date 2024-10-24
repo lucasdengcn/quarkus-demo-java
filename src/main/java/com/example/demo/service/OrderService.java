@@ -46,7 +46,8 @@ public class OrderService {
 
     public List<Order> findAllOrders(){
         PanacheQuery<OrderEntity> panacheQuery = orderRepository.findAll();
-        List<OrderEntity> orderEntities = panacheQuery.stream().toList();
+        // stream() would need in transaction context
+        List<OrderEntity> orderEntities = panacheQuery.list();
         return orderMapper.toModels(orderEntities);
     }
 
@@ -54,7 +55,8 @@ public class OrderService {
         Page page = Page.of(index, size);
         PanacheQuery<OrderEntity> panacheQuery = orderRepository.findByPage(page);
         long count = panacheQuery.count();
-        List<OrderEntity> orderEntities = panacheQuery.stream().toList();
+        // stream() would need in transaction context
+        List<OrderEntity> orderEntities = panacheQuery.list();
         List<Order> models = orderMapper.toModels(orderEntities);
         //
         return new PageableOutput<Order>(panacheQuery, models, size, index);

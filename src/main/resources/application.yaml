@@ -1,12 +1,22 @@
 quarkus:
+  application:
+    name: demo-app
+  profile:
+    dev
   devservices:
     enabled: false
   native:
     resources:
       includes: publicKey.pem
+  http:
+    port: 8080
   # OAS
   swagger-ui:
     always-include: true
+    theme: material
+  smallrye-openapi:
+    management:
+      enabled: false
   # logging
   log:
     level: INFO
@@ -19,11 +29,24 @@ quarkus:
   datasource:
     devservices:
       enabled: false
+    health:
+      enabled: true
+    metrics:
+      enabled: true
+    #
     db-kind: postgresql
-    jdbc:
-      url: jdbc:postgresql://localhost:15432/postgres?currentSchema=demo-service&autoReconnect=true&serverTimezone=UTC&characterEncoding=utf-8&allowMultiQueries=true&stringtype=unspecified
     username: postgres
     password: pgdev01
+    #
+    jdbc:
+      enable-metrics: true
+      initial-size: 5
+      min-size: 5
+      max-size: 10
+      validate-on-borrow: true
+      pooling-enabled: true
+      url: jdbc:postgresql://localhost:15432/postgres?currentSchema=demo-service&autoReconnect=true&serverTimezone=UTC&characterEncoding=utf-8&allowMultiQueries=true&stringtype=unspecified
+      validation-query-sql: SELECT NOW()
   # orm
   hibernate-orm:
     statistics: true
@@ -36,10 +59,16 @@ quarkus:
       generation: none
     flush:
       mode: auto
+    log:
+      sql: true
+      queries-slower-than-ms: 1000
   # redis
   redis:
     hosts: redis://localhost:6379/0
+    max-pool-size: 5
     timeout: 5s
+    orders:
+      timeout: 10s
   # cache
   cache:
     type: redis
@@ -59,13 +88,43 @@ quarkus:
     fake-post-client:
       url: https://jsonplaceholder.typicode.com
       scope: jakarta.inject.Singleton
-
+  # OTEL
+  otel:
+    resource:
+      attributes: deployment.environment=dev,service.name=demo-orders,service.namespace=demo
+    metrics:
+      enabled: true
+      exporter: logging # otlp
+    traces:
+      enabled: true
+      exporter: logging # otlp
+    metric:
+      export:
+        interval: 10000ms
+    # for dev/sit/uat/prod
+    #exporter:
+    #  otlp:
+    #    endpoint: http://localhost:4317
+  # metrics
+  management:
+    enabled: true
+  micrometer:
+    export:
+      json:
+        enabled: true
+        path: metrics/json
+      prometheus:
+        path: metrics/prometheus
 # kafka
 kafka:
   group:
     id: demoService-orders
   bootstrap:
     servers: localhost:39192
+smallrye:
+  messaging:
+    observation:
+      enabled: true
 # messaging
 mp:
   jwt:

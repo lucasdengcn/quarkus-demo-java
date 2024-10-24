@@ -49,6 +49,10 @@ https://quarkus.io/guides/opentelemetry
 
 https://quarkus.io/guides/telemetry-micrometer
 
+https://quarkus.io/guides/telemetry-micrometer#create-your-own-metrics
+
+https://quarkus.io/guides/smallrye-health
+
 ### Cache
 
 https://quarkus.io/guides/cache-redis-reference
@@ -56,6 +60,8 @@ https://quarkus.io/guides/cache-redis-reference
 https://quarkus.io/guides/cache
 
 https://quarkus.io/guides/redis-reference
+
+https://quarkus.io/guides/redis-reference#use-the-vert-x-redis-client
 
 ### Security
 
