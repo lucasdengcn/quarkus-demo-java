@@ -30,7 +30,7 @@ quarkus:
       format: "%d{yyyy-MM-dd HH:mm:ss} %-5p traceId=%X{traceId}, parentId=%X{parentId}, spanId=%X{spanId}, sampled=%X{sampled} [%c{2.}] (%t) %s%e%n"
     file:
       enable: true
-      path: application.log
+      path: logs/application.log
       async: true
       async.queue-length: 100
       async.overflow: discard
@@ -53,8 +53,8 @@ quarkus:
       enabled: true
     #
     db-kind: postgresql
-    username: postgres
-    password: pgdev01
+    username: ${PG_USERNAME:postgres}
+    password: ${PG_PASSWORD:pgdev01}
     #
     jdbc:
       enable-metrics: true
@@ -64,7 +64,7 @@ quarkus:
       max-size: 10
       validate-on-borrow: true
       pooling-enabled: true
-      url: jdbc:postgresql://localhost:15432/postgres?currentSchema=demo-service&autoReconnect=true&serverTimezone=UTC&characterEncoding=utf-8&allowMultiQueries=true&stringtype=unspecified
+      url: jdbc:postgresql://${PG_HOST:localhost:15432}/${PG_DB:postgres}?currentSchema=${PG_SCHEMA:demo-service}&autoReconnect=true&serverTimezone=UTC&characterEncoding=utf-8&allowMultiQueries=true&stringtype=unspecified
       validation-query-sql: SELECT NOW()
   # orm
   hibernate-orm:
@@ -83,7 +83,7 @@ quarkus:
       queries-slower-than-ms: 1000
   # redis
   redis:
-    hosts: redis://localhost:6379/0
+    hosts: ${REDIS_HOST:redis://localhost:6379/0}
     max-pool-size: 5
     timeout: 5s
     orders:
@@ -143,7 +143,7 @@ kafka:
   group:
     id: demoService-orders
   bootstrap:
-    servers: localhost:39192
+    servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:39192}
 smallrye:
   messaging:
     observation:
