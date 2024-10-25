@@ -117,3 +117,8 @@ http://localhost:8080/q/health-ui/
 
 http://localhost:8080/q/swagger-ui/
 
+### OTEL on Components
+
+- JDBC
+- Redis
+- Kafka

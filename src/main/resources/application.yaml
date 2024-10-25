@@ -10,6 +10,10 @@ quarkus:
       includes: publicKey.pem
   http:
     port: 8080
+    auth:
+      proactive: true #
+    #access-log:
+    #  pattern:
   # OAS
   swagger-ui:
     always-include: true
@@ -20,6 +24,8 @@ quarkus:
   # logging
   log:
     level: INFO
+    console:
+      format: "%d{HH:mm:ss} %-5p traceId=%X{traceId}, parentId=%X{parentId}, spanId=%X{spanId}, sampled=%X{sampled} [%c{2.}] (%t) %s%e%n"
     category:
       io.quarkus.vertx.http.access:
         level: DEBUG
@@ -41,6 +47,7 @@ quarkus:
     jdbc:
       enable-metrics: true
       initial-size: 5
+      telemetry: true
       min-size: 5
       max-size: 10
       validate-on-borrow: true
@@ -97,10 +104,14 @@ quarkus:
       exporter: logging # otlp
     traces:
       enabled: true
+      eusp:
+        enabled: true
+      sampler: traceidratio
+      sampler.arg: 1.0
       exporter: logging # otlp
     metric:
       export:
-        interval: 10000ms
+        interval: 1000ms
     # for dev/sit/uat/prod
     #exporter:
     #  otlp:

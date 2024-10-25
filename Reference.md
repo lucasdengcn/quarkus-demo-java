@@ -47,6 +47,8 @@ https://quarkus.io/guides/kafka#incoming-channel-configuration-polling-from-kafk
 
 https://quarkus.io/guides/opentelemetry
 
+https://quarkus.io/guides/opentelemetry-tracing
+
 https://quarkus.io/guides/telemetry-micrometer
 
 https://quarkus.io/guides/telemetry-micrometer#create-your-own-metrics

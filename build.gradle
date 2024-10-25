@@ -43,6 +43,7 @@ dependencies {
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.6.2'
     // OTEL
     implementation 'io.quarkus:quarkus-opentelemetry'
+    implementation 'io.opentelemetry.instrumentation:opentelemetry-jdbc'
     implementation 'io.quarkus:quarkus-micrometer'
     implementation 'io.quarkus:quarkus-micrometer-registry-prometheus'
     implementation 'io.quarkus:quarkus-smallrye-health'

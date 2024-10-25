@@ -8,6 +8,8 @@ import com.example.demo.model.Order;
 import com.example.demo.model.OrderInput;
 import com.example.demo.model.common.PageableOutput;
 import com.example.demo.repository.OrderRepository;
+import io.opentelemetry.instrumentation.annotations.SpanAttribute;
+import io.opentelemetry.instrumentation.annotations.WithSpan;
 import io.quarkus.cache.CacheInvalidate;
 import io.quarkus.cache.CacheKey;
 import io.quarkus.cache.CacheResult;
@@ -73,6 +75,7 @@ public class OrderService {
         return orderMapper.toModel(orderEntity);
     }
 
+    @WithSpan
     @Transactional
     public Order createOrder(OrderInput orderInput){
         OrderEntity orderEntity = orderMapper.toEntity(orderInput);
@@ -89,7 +92,8 @@ public class OrderService {
 
     @Transactional
     @CacheInvalidate(cacheName = ORDERS_CACHE)
-    public void deleteOrder(@CacheKey Integer id) throws EntityNotFoundException {
+    @WithSpan
+    public void deleteOrder(@SpanAttribute(value = "orderId") @CacheKey Integer id) throws EntityNotFoundException {
         OrderEntity orderEntity = orderRepository.findByIdOptional(id)
                 .orElseThrow(new EntityNotFoundExceptionSupplier<>(OrderEntity.class, id));
         orderRepository.delete(orderEntity);
@@ -97,7 +101,8 @@ public class OrderService {
 
     @Transactional
     @CacheInvalidate(cacheName = ORDERS_CACHE)
-    public Order updateOrder(@CacheKey Integer id, OrderInput orderInput){
+    @WithSpan
+    public Order updateOrder(@SpanAttribute(value = "orderId") @CacheKey Integer id, OrderInput orderInput){
         OrderEntity orderEntity = orderRepository.findByIdOptional(id)
                 .orElseThrow(new EntityNotFoundExceptionSupplier<>(OrderEntity.class, id));
         OrderEntity entity = orderMapper.toEntity(orderInput);
