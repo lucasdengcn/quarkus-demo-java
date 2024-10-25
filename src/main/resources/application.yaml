@@ -14,6 +14,8 @@ quarkus:
       proactive: true #
     #access-log:
     #  pattern:
+  config-tracking:
+    enabled: true
   # OAS
   swagger-ui:
     always-include: true
@@ -25,7 +27,17 @@ quarkus:
   log:
     level: INFO
     console:
-      format: "%d{HH:mm:ss} %-5p traceId=%X{traceId}, parentId=%X{parentId}, spanId=%X{spanId}, sampled=%X{sampled} [%c{2.}] (%t) %s%e%n"
+      format: "%d{yyyy-MM-dd HH:mm:ss} %-5p traceId=%X{traceId}, parentId=%X{parentId}, spanId=%X{spanId}, sampled=%X{sampled} [%c{2.}] (%t) %s%e%n"
+    file:
+      enable: true
+      path: application.log
+      async: true
+      async.queue-length: 100
+      async.overflow: discard
+      format: "%d{yyyy-MM-dd HH:mm:ss} %-5p traceId=%X{traceId}, parentId=%X{parentId}, spanId=%X{spanId}, sampled=%X{sampled} [%c{2.}] (%t) %s%e%n"
+      rotation:
+        max-file-size: 10M
+        max-backup-index: 5
     category:
       io.quarkus.vertx.http.access:
         level: DEBUG

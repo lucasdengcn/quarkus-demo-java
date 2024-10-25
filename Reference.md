@@ -1,5 +1,54 @@
 ## Practices Reference
 
+### Configuration
+
+https://quarkus.io/guides/config-reference
+
+https://quarkus.io/guides/config-yaml
+
+https://quarkus.io/guides/config-reference#property-expressions
+
+https://quarkus.io/guides/config-reference#secret-keys-expressions
+
+#### Conversion rules
+
+https://github.com/eclipse/microprofile-config/blob/master/spec/src/main/asciidoc/configsources.asciidoc#default-configsources
+
+- System properties via -D flag
+- Environment variables via export
+- Application configuration file
+- Vault https://github.com/quarkiverse/quarkus-vault
+- Consul https://github.com/quarkiverse/quarkus-config-extensions
+
+#### Profiles
+
+```yaml
+
+%dev.quarkus
+%test.quarkus
+%uat.quarkus
+%staging.quarkus
+%prod.quarkus
+
+```
+
+Profile aware files
+
+- application.yaml
+- application-dev.yaml
+- application-test.yaml
+- application-staging.yaml
+- application-prod.yaml
+
+Parent Profile
+
+- application-common.yaml
+
+Environment Vars
+
+application.host=${ENV_HOST:${remote.host}}
+
+
 ### ORM
 
 https://quarkus.io/guides/hibernate-orm
@@ -19,6 +68,9 @@ https://quarkus.io/guides/config-yaml
 ### Logging
 
 https://quarkus.io/guides/logging
+
+https://quarkus.io/guides/logging#loggingConfigurationReference
+
 
 ### Open API
 
@@ -75,7 +127,7 @@ https://quarkus.io/guides/security-authentication-mechanisms#mutual-tls
 
 https://quarkus.io/guides/security-jwt
 
-
+https://quarkus.io/guides/images/security-architecture-overview.png
 
 ### Testing
 
