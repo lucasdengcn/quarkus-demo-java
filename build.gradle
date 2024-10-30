@@ -28,6 +28,8 @@ dependencies {
     // security
     implementation 'io.quarkus:quarkus-smallrye-jwt'
     implementation 'io.quarkus:quarkus-smallrye-jwt-build'
+    // oidc
+    implementation 'io.quarkus:quarkus-oidc'
     // messaging
     implementation 'io.quarkus:quarkus-messaging-kafka'
     implementation 'io.quarkus:quarkus-kafka-client'

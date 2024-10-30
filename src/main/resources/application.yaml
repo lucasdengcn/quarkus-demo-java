@@ -8,10 +8,19 @@ quarkus:
   native:
     resources:
       includes: publicKey.pem
+  # http
+  # https://quarkus.io/guides/http-reference
   http:
     port: 8080
     auth:
       proactive: true #
+      permission:
+        authenticated:
+          paths: /*
+          policy: authenticated
+        public:
+          paths: /auth/*
+          policy: permit
     #access-log:
     #  pattern:
   config-tracking:
@@ -55,7 +64,7 @@ quarkus:
     db-kind: postgresql
     username: ${PG_USERNAME:postgres}
     password: ${PG_PASSWORD:pgdev01}
-    #
+    # default
     jdbc:
       enable-metrics: true
       initial-size: 5
@@ -138,6 +147,40 @@ quarkus:
         path: metrics/json
       prometheus:
         path: metrics/prometheus
+  # oidc
+  # $auth-server/.well-known/openid-configuration
+  oidc:
+    auth-server-url: http://localhost:3080/realms/quarkus
+#    discovery-enabled: false
+#    authorization-pth: /protocol/openid-connect/auth
+#    token-path: /protocol/openid-connect/token
+#    jwks-path: /protocol/openid-connect/certs
+#    user-info-path: /protocol/openid-connect/userinfo
+#    introspection-path: /protocol/openid-connect/token/introspect
+#    end-session-path: /protocol/openid-connect/logout
+    client-id: frontend
+    credentials:
+      secret: secret
+    application-type: web-app
+    authentication:
+      #redirect-path: /auth/callback
+      #restore-path-after-redirect: true
+      cookie-path: /
+      error-path: /auth/error
+      pkce-required: true
+      allow-multiple-code-flows: false # disable multi-tab authentication
+      # state-secret: eUk1p7UB3nFiXZGUXi0uph1Y9p34YhBU # will be auto generated
+      # session-age-extension: 600s
+    token-state-manager:
+      split-tokens: true
+      strategy: keep-all-tokens # default is keep-all-tokens
+      encryption-required: true
+      encryption-secret: eUk1p7UB3nFiXZGUXi0uph1Y9p34YhBU # 32 characters long
+    logout:
+      path: /logout
+      post-logout-path: /tokens
+    token:
+      refresh-expired: true
 # kafka
 kafka:
   group:
