@@ -161,7 +161,7 @@ quarkus:
     client-id: frontend
     credentials:
       secret: secret
-    application-type: web-app
+    application-type: hybrid # web-app, service, hybrid
     authentication:
       #redirect-path: /auth/callback
       #restore-path-after-redirect: true
