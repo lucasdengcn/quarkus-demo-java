@@ -25,6 +25,7 @@ dependencies {
     implementation 'io.quarkus:quarkus-cache'
     implementation 'io.quarkus:quarkus-redis-cache'
     implementation 'io.quarkus:quarkus-redis-client'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.18.1'
     // security
     implementation 'io.quarkus:quarkus-smallrye-jwt'
     implementation 'io.quarkus:quarkus-smallrye-jwt-build'

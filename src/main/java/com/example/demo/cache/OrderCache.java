@@ -1,20 +1,15 @@
 package com.example.demo.cache;
 
 import com.example.demo.model.Order;
-import io.quarkus.cache.Cache;
-import io.quarkus.cache.CacheName;
 import io.quarkus.redis.datasource.RedisDataSource;
 import io.quarkus.redis.datasource.value.ValueCommands;
 import io.smallrye.common.constraint.NotNull;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
 
 @ApplicationScoped
 public class OrderCache {
 
-    @Inject
-    @CacheName("orders-cache")
-    Cache cache;
+    public static final int EXP_SECONDS = 300;
 
     final ValueCommands<String, Order> valueCommands;
 
@@ -24,7 +19,7 @@ public class OrderCache {
 
     public void set(Order order){
         String key = getCacheKey(order.getId());
-        valueCommands.setex(key, 10, order);
+        valueCommands.setex(key, EXP_SECONDS, order);
     }
 
     public Order get(Integer id){

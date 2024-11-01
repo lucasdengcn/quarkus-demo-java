@@ -99,12 +99,14 @@ quarkus:
       timeout: 10s
   # cache
   cache:
-    type: redis
+    type: redis # redis
     redis:
       expire-after-write: 300s
       orders-cache:
         prefix: orders
         value-type: com.example.demo.model.Order
+      dx-lock:
+        prefix: dx-lock
       posts-cache:
         prefix: posts
         value-type: com.example.demo.integration.model.FakePost

@@ -68,6 +68,7 @@ public class OrderService {
         return new PageableOutput<Order>(panacheQuery, models, size, index);
     }
 
+    @Transactional
     @CacheResult(cacheName = ORDERS_CACHE)
     public Order findOrderById(@CacheKey Integer id){
         OrderEntity orderEntity = orderRepository.findByIdOptional(id)

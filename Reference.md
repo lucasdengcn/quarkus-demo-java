@@ -117,6 +117,8 @@ https://quarkus.io/guides/redis-reference
 
 https://quarkus.io/guides/redis-reference#use-the-vert-x-redis-client
 
+https://quarkus.io/guides/redis-reference#default-and-named-clients
+
 ### Security
 
 https://quarkus.io/guides/security-overview
